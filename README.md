@@ -8,16 +8,26 @@ EZFastboot simplifies fastboot and has a nice GUI written in [Tauri](https://tau
   ![tauri](https://img.shields.io/badge/Tauri-FFC131?style=for-the-badge&logo=Tauri&logoColor=white)
 
   ![react](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+  
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](/public/screenshots/1.png)
 
+<details>
+<summary>More Screenshots</summary>
+
+![App Screenshot](/public/screenshots/2.png)
+![App Screenshot](/public/screenshots/3.png)
+![App Screenshot](/public/screenshots/4.png)
+
+</details>
 
 ## Run Locally
 
 See Tauri's documentation for [Getting Started](https://tauri.app/v1/guides/getting-started/prerequisites)
 
 > **Note**
+>
 > [pnpm](https://pnpm.io/) is highly recommended
 
 Clone the project
