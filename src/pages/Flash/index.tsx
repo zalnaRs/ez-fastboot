@@ -7,12 +7,12 @@ import {
   Select,
   Stack,
   Typography,
-} from "@mui/material";
-import React, { useState } from "react";
-import FlashSimple from "./Flash/Simple";
+} from '@mui/material';
+import React, { useState } from 'react';
+import FlashSimple from './Simple';
 
 const Flash: React.FC = () => {
-  const [type, setType] = useState("simple");
+  const [type, setType] = useState('simple');
 
   return (
     <Stack direction="column" sx={{ padding: 2 }}>
@@ -32,12 +32,12 @@ const Flash: React.FC = () => {
           value={type}
           onChange={(e) => setType(e.target.value)}
         >
-          <MenuItem value={"simple"}>Simple</MenuItem>
-          <MenuItem value={"advanced"}>Advanced</MenuItem>
+          <MenuItem value={'simple'}>Simple</MenuItem>
+          <MenuItem value={'advanced'}>Advanced</MenuItem>
         </Select>
       </FormControl>
 
-      {type === "simple" && <FlashSimple />}
+      {type === 'simple' && <FlashSimple />}
     </Stack>
   );
 };
