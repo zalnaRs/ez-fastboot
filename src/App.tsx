@@ -1,17 +1,21 @@
-import React, { Suspense, useEffect } from "react";
-import MainAppBar from "./components/MainAppBar";
-import { createTheme, ThemeProvider } from "@mui/material";
-import { useAtom } from "jotai";
-import { loadingAtom, logsAtom, pageAtom } from "./store/jotai";
-import Flash from "./pages/Flash";
-import { getTauriVersion } from "@tauri-apps/api/app";
-import LoadingDialog from "./components/LoadingDialog";
-import { Provider as JotaiProvider } from "jotai";
-import "./lib/Shell";
-import ShellProvider from "./lib/Shell";
-import Boot from "./pages/Boot";
-import DeviceInfo from "./pages/DeviceInfo";
-import Wipe from "./pages/Wipe";
+import React, { Suspense, lazy, useEffect } from 'react';
+import MainAppBar from './components/MainAppBar';
+import {
+  CircularProgress,
+  createTheme,
+  Stack,
+  ThemeProvider,
+} from '@mui/material';
+import { useAtom } from 'jotai';
+import { logsAtom, pageAtom } from './store/jotai';
+import { getTauriVersion } from '@tauri-apps/api/app';
+import LoadingDialog from './components/LoadingDialog';
+import ShellProvider from './lib/Shell';
+
+const Flash = lazy(() => import('./pages/Flash'));
+const Boot = lazy(() => import('./pages/Boot'));
+const DeviceInfo = lazy(() => import('./pages/DeviceInfo'));
+const Wipe = lazy(() => import('./pages/Wipe'));
 
 function App() {
   const theme = createTheme();
@@ -32,10 +36,23 @@ function App() {
         <LoadingDialog />
         <MainAppBar />
 
-        {page === 0 && <DeviceInfo />}
-        {page === 1 && <Flash />}
-        {page === 2 && <Boot />}
-        {page === 3 && <Wipe />}
+        <Suspense
+          fallback={
+            <Stack
+              height={'100vh'}
+              width={'100%'}
+              justifyContent={'center'}
+              alignItems={'center'}
+            >
+              <CircularProgress />
+            </Stack>
+          }
+        >
+          {page === 0 && <DeviceInfo />}
+          {page === 1 && <Flash />}
+          {page === 2 && <Boot />}
+          {page === 3 && <Wipe />}
+        </Suspense>
       </ThemeProvider>
     </ShellProvider>
   );
