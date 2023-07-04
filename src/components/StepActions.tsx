@@ -1,6 +1,6 @@
-import { ArrowBackRounded } from "@mui/icons-material";
-import { Stack, IconButton, Button } from "@mui/material";
-import React from "react";
+import { ArrowBackRounded } from '@mui/icons-material';
+import { Stack, IconButton, Button } from '@mui/material';
+import React from 'react';
 
 interface StepActionsProps {
   setCurrentStep: any;
@@ -16,7 +16,12 @@ const StepActions: React.FC<StepActionsProps> = ({
   noNext,
 }) => {
   return (
-    <Stack direction="row" alignItems="center" justifyContent="space-between">
+    <Stack
+      marginTop={1}
+      direction="row"
+      alignItems="center"
+      justifyContent="space-between"
+    >
       {!noBack && (
         <IconButton
           aria-label="back"
