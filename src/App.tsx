@@ -3,6 +3,7 @@ import MainAppBar from './components/MainAppBar';
 import {
   CircularProgress,
   createTheme,
+  CssBaseline,
   Stack,
   ThemeProvider,
 } from '@mui/material';
@@ -33,6 +34,7 @@ function App() {
   return (
     <ShellProvider>
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <LoadingDialog />
         <MainAppBar />
 
