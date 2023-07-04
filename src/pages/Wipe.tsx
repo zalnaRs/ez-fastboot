@@ -1,4 +1,4 @@
-import { AddRounded, DeleteRounded } from "@mui/icons-material";
+import { AddRounded, DeleteRounded } from '@mui/icons-material';
 import {
   Alert,
   AlertTitle,
@@ -8,13 +8,13 @@ import {
   ListItem,
   Stack,
   Typography,
-} from "@mui/material";
-import React, { useState } from "react";
-import SelectPartition from "../components/SelectPartition";
-import { runCommand } from "../lib/Shell";
+} from '@mui/material';
+import React, { useState } from 'react';
+import SelectPartition from '../components/SelectPartition';
+import { runCommand } from '../lib/Shell';
 
 const Wipe: React.FC = () => {
-  const [partitions, setPartitions] = useState(["system"]);
+  const [partitions, setPartitions] = useState(['system']);
 
   const handleChange = (index: number, value: string) => {
     const _partitions = [...partitions];
@@ -30,7 +30,7 @@ const Wipe: React.FC = () => {
 
   const handleAdd = () => {
     const _partitions = [...partitions];
-    _partitions.push("system");
+    _partitions.push('system');
     setPartitions(_partitions);
   };
 
@@ -70,14 +70,14 @@ const Wipe: React.FC = () => {
           onClick={async () => {
             for (const i in partitions) {
               const element = partitions[i];
-              await runCommand(`Wiping ${element}`, "fastboot", [
-                "erase",
+              await runCommand(`Wiping ${element}`, 'fastboot', [
+                'erase',
                 element,
               ]);
             }
           }}
         >
-          Flash
+          Wipe
         </Button>
       </Alert>
     </Stack>

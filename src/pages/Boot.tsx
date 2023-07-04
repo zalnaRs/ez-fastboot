@@ -12,11 +12,11 @@ import {
   StepLabel,
   Stepper,
   Typography,
-} from "@mui/material";
-import React, { useState } from "react";
-import StepActions from "../components/StepActions";
-import PickFile from "../lib/PickFile";
-import { runCommand } from "../lib/Shell";
+} from '@mui/material';
+import React, { useState } from 'react';
+import StepActions from '../components/StepActions';
+import PickFile from '../lib/PickFile';
+import { runCommand } from '../lib/Shell';
 
 const Boot: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -40,8 +40,12 @@ const Boot: React.FC = () => {
           </StepLabel>
           <StepContent>
             <Stack direction="column">
-              <PickFile file={file ?? ""} setFile={setFile} />
-              <StepActions setCurrentStep={setCurrentStep} disabled={!file} />
+              <PickFile file={file ?? ''} setFile={setFile} />
+              <StepActions
+                noBack
+                setCurrentStep={setCurrentStep}
+                disabled={!file}
+              />
             </Stack>
           </StepContent>
         </Step>
@@ -60,7 +64,7 @@ const Boot: React.FC = () => {
               <Button
                 variant="contained"
                 onClick={async () => {
-                  runCommand("Booting", "fastboot", ["boot", file!]);
+                  runCommand('Booting', 'fastboot', ['boot', file!]);
                 }}
               >
                 Boot
