@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
-import StepContent from "@mui/material/StepContent";
+import React, { useState } from 'react';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
+import StepContent from '@mui/material/StepContent';
 import {
   FormControl,
   IconButton,
@@ -15,26 +15,26 @@ import {
   AlertTitle,
   FormControlLabel,
   Checkbox,
-} from "@mui/material";
-import { ArrowBackRounded } from "@mui/icons-material";
-import StepActions from "../../components/StepActions";
-import PickFile from "../../lib/PickFile";
-import { Command } from "@tauri-apps/api/shell";
-import SelectPartition from "../../components/SelectPartition";
-import { useAtom } from "jotai";
-import { runCommand } from "../../lib/Shell";
+} from '@mui/material';
+import { ArrowBackRounded } from '@mui/icons-material';
+import StepActions from '../../components/StepActions';
+import PickFile from '../../lib/PickFile';
+import { Command } from '@tauri-apps/api/shell';
+import SelectPartition from '../../components/SelectPartition';
+import { useAtom } from 'jotai';
+import { runCommand } from '../../lib/Shell';
 
 const FlashSimple: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [partition, setPartition] = useState("");
+  const [partition, setPartition] = useState('');
   const [file, setFile] = useState(null);
   const [bootAfter, setBootAfter] = useState(false);
 
   return (
     <Stepper activeStep={currentStep} orientation="vertical">
-      <Step key={0} completed={partition != ""}>
+      <Step key={0} completed={partition != ''}>
         <StepLabel>
-          Select the partition to flash {partition != "" && `- ${partition}`}
+          Select the partition to flash {partition != '' && `- ${partition}`}
         </StepLabel>
         <StepContent>
           <Stack direction="column">
@@ -45,7 +45,7 @@ const FlashSimple: React.FC = () => {
 
             <StepActions
               setCurrentStep={setCurrentStep}
-              disabled={partition === ""}
+              disabled={partition === ''}
               noBack
             />
           </Stack>
@@ -57,7 +57,7 @@ const FlashSimple: React.FC = () => {
         </StepLabel>
         <StepContent>
           <Stack direction="column">
-            <PickFile file={file ?? ""} setFile={setFile} />
+            <PickFile file={file ?? ''} setFile={setFile} />
             <StepActions setCurrentStep={setCurrentStep} disabled={!file} />
           </Stack>
         </StepContent>
@@ -87,13 +87,13 @@ const FlashSimple: React.FC = () => {
             <Button
               variant="contained"
               onClick={async () => {
-                await runCommand("Flashing", "fastboot", [
-                  "flash",
+                await runCommand('Flashing', 'fastboot', [
+                  'flash',
                   partition!,
                   file!,
                 ]);
                 if (bootAfter) {
-                  await runCommand("Booting", "fastboot", ["boot", file!]);
+                  await runCommand('Booting', 'fastboot', ['boot', file!]);
                 }
               }}
             >
