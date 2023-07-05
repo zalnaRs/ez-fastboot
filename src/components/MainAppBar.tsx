@@ -1,4 +1,4 @@
-import { RefreshRounded, TerminalRounded } from "@mui/icons-material";
+import { RefreshRounded, TerminalRounded } from '@mui/icons-material';
 import {
   Toolbar,
   Button,
@@ -8,11 +8,11 @@ import {
   Tab,
   Tabs,
   Stack,
-} from "@mui/material";
-import { useAtom } from "jotai";
-import React, { useState } from "react";
-import Logs from "../modals/Logs";
-import { pageAtom } from "../store/jotai";
+} from '@mui/material';
+import { useAtom } from 'jotai';
+import React, { useState } from 'react';
+import Logs from '../modals/Logs';
+import { pageAtom } from '../store/jotai';
 
 const MainAppBar: React.FC = () => {
   const [page, setPage] = useAtom(pageAtom);
@@ -43,11 +43,12 @@ const MainAppBar: React.FC = () => {
             <TerminalRounded />
           </IconButton>
         </Tooltip>
+        {/* 
         <Tooltip title="Refresh Devices">
           <IconButton aria-label="Refresh Devices">
             <RefreshRounded />
           </IconButton>
-        </Tooltip>
+        </Tooltip> */}
       </Stack>
       <Logs
         anchorEl={logsAnchorEl!}
