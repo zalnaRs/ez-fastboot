@@ -9,19 +9,20 @@ import {
   ListItem,
   ListItemText,
   Typography,
-} from "@mui/material";
-import { useAtom } from "jotai";
-import React, { useEffect } from "react";
-import { runCommand } from "../lib/Shell";
-import { devicesAtom } from "../store/jotai";
+  Skeleton,
+} from '@mui/material';
+import { useAtom } from 'jotai';
+import React, { useEffect } from 'react';
+import { runCommand } from '../lib/Shell';
+import { devicesAtom } from '../store/jotai';
 
 const DeviceInfo: React.FC = () => {
   const [devices, setDevices] = useAtom(devicesAtom);
 
   useEffect(() => {
     (async () => {
-      const output = await runCommand("Getting Device Info", "fastboot", [
-        "devices",
+      const output = await runCommand('Getting Device Info', 'fastboot', [
+        'devices',
       ]);
       console.log(output);
     })();
@@ -29,13 +30,18 @@ const DeviceInfo: React.FC = () => {
 
   return (
     <Stack sx={{ padding: 2 }}>
-      <Card variant="outlined">
-        <CardHeader title="vayu" subheader="Fastboot" />
+      <Card variant="outlined" sx={{ px: 2 }}>
+        <Skeleton width={'full'}>
+          <CardHeader title="vayu" subheader="Fastboot" />
+        </Skeleton>
         <CardContent>
-          <List>
-            <ListItem>
-              <ListItemText>
-                Bootloader Status: <Typography color="red">locked</Typography>
+          <List disablePadding>
+            <ListItem sx={{ display: 'flex', flexDirection: 'row' }}>
+              <ListItemText sx={{ display: 'flex', flexDirection: 'row' }}>
+                <Typography>Bootloader Status:</Typography>
+                <Skeleton>
+                  <Typography color="red">locked</Typography>
+                </Skeleton>
               </ListItemText>
             </ListItem>
           </List>
