@@ -10,7 +10,7 @@ import {
 import { useAtom } from 'jotai';
 import { logsAtom, pageAtom } from './store/jotai';
 import { getTauriVersion } from '@tauri-apps/api/app';
-import LoadingDialog from './components/LoadingDialog';
+import LoadingDialog from './modals/Loading';
 import ShellProvider from './lib/Shell';
 
 const Flash = lazy(() => import('./pages/Flash'));
