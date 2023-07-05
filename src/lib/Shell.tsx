@@ -1,10 +1,10 @@
-import { Command } from "@tauri-apps/api/shell";
-import { SetStateAction, useAtom } from "jotai";
-import React, { PropsWithChildren, useEffect } from "react";
-import LoadingDialog from "../components/LoadingDialog";
-import { loadingAtom } from "../store/jotai";
+import { Command } from '@tauri-apps/api/shell';
+import { useAtom } from 'jotai';
+import React, { PropsWithChildren, useEffect } from 'react';
+import { loadingAtom, logsAtom } from '../store/jotai';
 
 let setLoading: any;
+let setLogs: any;
 
 export const runCommand = async (
   title: string,
@@ -13,10 +13,11 @@ export const runCommand = async (
 ) => {
   await new Promise<string | void>((resolve, reject) => {
     const command = new Command(cmd, args);
-    let data = "";
+    let data = '';
     command.spawn().then((child) => {
-      command.stdout.on("data", (v) => {
+      command.stdout.on('data', (v) => {
         data += `\n${v}`;
+        setLogs((cur: string) => (cur += `\n${v}`));
         setLoading((loading: any) => ({
           ...loading,
           open: true,
@@ -24,8 +25,8 @@ export const runCommand = async (
           title: title,
           cancel: () => {
             setLoading({
-              title: "",
-              text: "",
+              title: '',
+              text: '',
               cancel: null,
               open: false,
             });
@@ -34,8 +35,9 @@ export const runCommand = async (
           },
         }));
       });
-      command.stderr.on("data", (v) => {
+      command.stderr.on('data', (v) => {
         data += `\n${v}`;
+        setLogs((cur: string) => (cur += `\n${v}`));
         setLoading((loading: any) => ({
           ...loading,
           open: true,
@@ -43,8 +45,8 @@ export const runCommand = async (
           title: title,
           cancel: () => {
             setLoading({
-              title: "",
-              text: "",
+              title: '',
+              text: '',
               cancel: null,
               open: false,
             });
@@ -53,7 +55,7 @@ export const runCommand = async (
           },
         }));
       });
-      command.on("close", (v) => {
+      command.on('close', (v) => {
         resolve(data);
         setLoading((loading: any) => ({
           ...loading,
@@ -62,8 +64,8 @@ export const runCommand = async (
           title: title,
           cancel: () => {
             setLoading({
-              title: "",
-              text: "",
+              title: '',
+              text: '',
               cancel: null,
               open: false,
             });
@@ -78,9 +80,11 @@ export const runCommand = async (
 
 const ShellProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const [_, v] = useAtom(loadingAtom);
+  const [logs, _setLogs] = useAtom(logsAtom);
 
   useEffect(() => {
     setLoading = v;
+    setLogs = _setLogs;
   }, []);
 
   return <>{children}</>;
